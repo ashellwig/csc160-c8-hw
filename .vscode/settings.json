@@ -1,0 +1,131 @@
+{
+  "C_Cpp.clang_format_style": "LLVM",
+  "C_Cpp.default.cppStandard": "c++17",
+  "[cpp]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "python.pythonPath": "/home/ahellwig/anaconda3/python",
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk",
+      "tools": ["latexmk"]
+    },
+    {
+      "name": "pdflatex -> bibtex -> pdflatex*2",
+      "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdf",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": ["%DOCFILE%"]
+    }
+  ],
+  "latex-workshop.latex.clean.enabled": true,
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk"
+  ],
+  "latex-preview.command": "latexmk",
+  "cSpell.words": [
+    "cmath",
+    "eger",
+    "iomanip",
+    "myage",
+    "perfectsquare",
+    "setprecision",
+    "showpoint",
+    "tolower",
+    "toupper"
+  ],
+  "files.associations": {
+    "iostream": "cpp",
+    "istream": "cpp",
+    "system_error": "cpp",
+    "ostream": "cpp",
+    "array": "cpp",
+    "string_view": "cpp",
+    "cctype": "cpp",
+    "clocale": "cpp",
+    "cmath": "cpp",
+    "cstdarg": "cpp",
+    "cstddef": "cpp",
+    "cstdio": "cpp",
+    "cstdlib": "cpp",
+    "cstring": "cpp",
+    "ctime": "cpp",
+    "cwchar": "cpp",
+    "cwctype": "cpp",
+    "atomic": "cpp",
+    "*.tcc": "cpp",
+    "chrono": "cpp",
+    "cinttypes": "cpp",
+    "cstdint": "cpp",
+    "deque": "cpp",
+    "list": "cpp",
+    "unordered_map": "cpp",
+    "vector": "cpp",
+    "exception": "cpp",
+    "fstream": "cpp",
+    "functional": "cpp",
+    "initializer_list": "cpp",
+    "iomanip": "cpp",
+    "iosfwd": "cpp",
+    "limits": "cpp",
+    "memory": "cpp",
+    "numeric": "cpp",
+    "optional": "cpp",
+    "ratio": "cpp",
+    "sstream": "cpp",
+    "stdexcept": "cpp",
+    "streambuf": "cpp",
+    "type_traits": "cpp",
+    "tuple": "cpp",
+    "typeinfo": "cpp",
+    "utility": "cpp",
+    "__config": "cpp",
+    "__nullptr": "cpp",
+    "algorithm": "cpp"
+  }
+}

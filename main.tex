@@ -1,0 +1,239 @@
+%
+% Module 4 Chapter 8 Homework
+% CSC160-C00: Computer Science I (C++)
+% Author: Ashton Hellwig
+%
+
+
+\documentclass[a4paper, 10pt]{article}
+
+
+  % Packages
+  \usepackage[utf8]{inputenc}       % Encoding
+  \usepackage[english]{babel}       % Internationalization
+  \usepackage{soul}                 % Highlighting
+  \usepackage{hyperref}             % Links (internal and external)
+  \usepackage{fancyhdr}             % Headers and footers
+  \usepackage[dvipsnames]{xcolor}   % Text Colors
+  \usepackage{listings}             % Code Snippets
+  \usepackage{algorithm}            % For TOC support
+  \usepackage{algorithmicx}         % Algorithmic notation support
+  \usepackage{algpseudocode}        % Algorithmic notation environments
+  \usepackage{enumitem}             % Ordered lists
+  \usepackage{geometry}             % Page layout
+  \usepackage{graphicx}             % Image support
+  \usepackage[toc, page]{appendix}  % Appendix
+  \usepackage{bookmark}
+  \usepackage{adjustbox}
+  \usepackage{csquotes}
+  \usepackage{amsthm}
+  \usepackage{array}
+  \usepackage{makecell}
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+  \usepackage{relsize}
+  \usepackage{multicol}
+  \usepackage{etoolbox,refcount}
+  \usepackage{parcolumns}
+
+%   \UseRawInputEncoding
+
+  % Tables
+  \renewcommand\theadalign{bc}
+  \renewcommand\theadfont{\bfseries}
+  \renewcommand\theadgape{\Gape[4pt]}
+  \renewcommand\cellgape{\Gape[4pt]}
+
+  % Lists
+  \newcounter{countitems}
+  \newcounter{nextitemizecount}
+  \newcommand{\setupcountitems}{%
+    \stepcounter{nextitemizecount}%
+    \setcounter{countitems}{0}%
+    \preto\item{\stepcounter{countitems}}%
+  }
+  \makeatletter
+  \newcommand{\computecountitems}{%
+    \edef\@currentlabel{\number\c@countitems}%
+    \label{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+  }
+  \newcommand{\nextitemizecount}{%
+    \getrefnumber{countitems@\number\c@nextitemizecount}%
+  }
+  \newcommand{\previtemizecount}{%
+    \getrefnumber{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+  }
+  \makeatother    
+  \newenvironment{AutoMultiColItemize}{%
+  \ifnumcomp{\nextitemizecount}{>}{3}{\begin{multicols}{2}}{}%
+  \setupcountitems\begin{itemize}}%
+  {\end{itemize}%
+  \unskip\computecountitems\ifnumcomp{\previtemizecount}{>}{3}{\end{multicols}}{}}
+
+
+
+  % Colors
+  \newcommand{\commentstylecolor}{\color{Gray}}
+  \newcommand{\keywordstylecolor}{\color{MidnightBlue}}
+  \newcommand{\stringstylecolor}{\color{ForestGreen}}
+  \newcommand{\questioninput}{\color{Red}}
+  \newcommand{\answertcolor}{\color{Green}}
+  \newcommand{\myanswer}{\answertcolor{\hl}}
+
+  % Symbols
+  \newcommand{\answerflow}{\rotatebox[origin=c]{180}{$\Lsh$}}
+  \newcommand{\toanswer}{\mathlarger{\mathlarger{\answerflow}}\quad}
+
+  % Math
+  \newcommand{\highlight}[1]{%
+    \colorbox{green!50}{$\displaystyle#1$}}
+
+  % Image Directory
+  \graphicspath{ {screenshots/} }
+
+
+  % Hyperlink Setup
+  \hypersetup{
+    colorlinks = true,
+    urlcolor = blue,
+    linkcolor = blue
+  }
+
+
+  % Syntax-Highlighting for Code Snippets
+  \lstset{
+    backgroundcolor=\color{white},
+    breaklines=true,%
+    captionpos=b,%
+    frame=tb,%
+    tabsize=4,%
+    % numbers=left,%
+    showstringspaces=false,%
+    commentstyle=\commentstylecolor,%
+    keywordstyle=\keywordstylecolor,%
+    stringstyle=\stringstylecolor%
+  }
+  \lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+  \newenvironment{alltt}{\ttfamily}{\par}
+
+
+  % Page Configuration
+  %% Style
+  \pagestyle{fancy}
+
+  %% Layout
+  \geometry{%
+  a4paper,%
+  top=2.5cm,%
+  bottom=2.5cm,%
+  left=2.5cm,%
+  right=2.5cm%
+  }
+  \setlength{\headheight}{12pt}
+  \setlength{\floatsep}{12pt}
+
+  %% Title page
+  \title{Module 4 Chapter 8 Homework}
+  \author{Ashton Hellwig}
+  \date\today
+  \setcounter{tocdepth}{3}
+
+  %% Subsequent pages
+  \lhead{CSC160}
+  \rhead{Computer Science I (C++)}
+  \lfoot{M4C8HW}
+  \rfoot{A. Hellwig}
+
+ 
+  % Document Content
+\begin{document}
+  \maketitle
+  \tableofcontents
+  \lstlistoflistings
+  \newpage
+
+  % Question 1
+  \section{Question 1}
+    Determine whether the following array declarations are valid. If a
+      declaration is invalid, explain why.
+    \begin{enumerate}[label=\Alph*.]
+      \item \lstinline[language=c++,columns=fixed]{string customers[ ] ;}
+      \item \lstinline[language=c++,columns=fixed]{int numArray[ 50] ;}
+      \item \lstinline[language=c++,columns=fixed]%
+        {const int SIZE = 30; double list[20 - SIZE];}
+      \item \lstinline[language=c++,columns=fixed]%
+        {int length = 50; double list[length - 50];}
+      \item \lstinline[language=c++,columns=fixed]{int ids[ -30] ;}
+      \item \lstinline[language=c++,columns=fixed]{colors [ 30] string;}
+    \end{enumerate}
+    % Question 1 Solution
+    \subsection{Solution}
+      \begin{enumerate}[label=\alph*.]
+        \item Placeholder.
+        \item Placeholder.
+        \item Placeholder.
+        \item Placeholder.
+        \item Placeholder.
+        \item Placeholder.
+      \end{enumerate}
+
+
+  % \newpage
+  % Question 2
+  \section{Question 2}
+    % \begin{enumerate}[label=\Alph*.]
+      % \item \lstinline[language=c++,columns=fixed]{int list[] = {18, 13, 14, 16};}
+      % \item \lstinline[language=c++,columns=fixed]{intx[10]={1,7,5,3,2,8};}
+      % \item \lstinline[language=c++,columns=fixed]{double y[ 4] = { 2.0, 5.0, 8.0, 11.0, 14.0} ;}
+      % \item \lstinline[language=c++,columns=fixed]{double lengths[ ] = { 8.2, 3.9, 6.4, 5.7, 7.3} ;}
+      % \item \lstinline[language=c++,columns=fixed]{int list[7] = {12, 13, , 14, 16, , 8};}
+      % \item \lstinline[language=c++,columns=fixed]{string names[8] = {"John","Lisa", "Chris", "Katie"};}
+    % \end{enumerate}
+    % Question 2 Solution
+    \subsection{Solution}
+      Placeholder.
+
+
+  % \newpage
+  % Question 3
+  \section{Question 3}
+    % Question 3 Solution
+    \subsection{Solution}
+      Placeholder.
+
+
+  % \newpage
+  % Question 4
+  \section{Question 4}
+    Placeholder.
+    % Question 4 Solution
+    \subsection{Solution}
+      Placeholder.
+
+
+  % \newpage
+  % Question 5
+  \section{Question 5}
+    Placeholder.
+    % Question 5 Solution
+    \subsection{Solution}
+      Placeholder.
+
+%   \newpage
+%   \appendix
+%   \section{Question }
+\end{document}
